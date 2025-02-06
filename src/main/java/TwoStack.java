@@ -48,6 +48,9 @@ public class TwoStack {
             } else if (token.equals("+") || token.equals("-") || token.equals("*") || token.equals("/")) {
                 ops.push(token);
             } else if (token.equals(")")) {
+                if (ops.isEmpty() || vals.size() < 2) {
+                    throw new IllegalStateException("Invalid expression");
+                }
                 String operator = ops.pop();
                 double val2 = vals.pop();
                 double val1 = vals.pop();
@@ -68,6 +71,9 @@ public class TwoStack {
             } else {
                 vals.push(Double.parseDouble(token));
             }
+        }
+        if (vals.isEmpty()) {
+            throw new IllegalStateException("Invalid expression");
         }
         return vals.pop();
     }
