@@ -41,13 +41,34 @@ public class TwoStack {
     Stack<Double> vals = new Stack<Double>();
     public double evaluate(String s){
         String[] tokens = s.split(" ");
-       
         //Loop over the tokens until you reach the end of the expression
         //TODO
-
-        
-
-
+        for (String token : tokens) {
+            if (token.equals("(")) {
+            } else if (token.equals("+") || token.equals("-") || token.equals("*") || token.equals("/")) {
+                ops.push(token);
+            } else if (token.equals(")")) {
+                String operator = ops.pop();
+                double val2 = vals.pop();
+                double val1 = vals.pop();
+                double result = 0;
+                if(operator.equals("+")){
+                    result = val1 + val2;
+                }
+                else if(operator.equals("-")){
+                    result = val1 - val2;
+                }
+                else if(operator.equals("*")){
+                    result = val1 * val2;
+                }
+                else if(operator.equals("/")){
+                    result = val1 / val2;
+                }
+                vals.push(result);
+            } else {
+                vals.push(Double.parseDouble(token));
+            }
+        }
         return vals.pop();
     }
 }
